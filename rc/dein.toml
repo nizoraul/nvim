@@ -1,0 +1,165 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+# NERDTreeを設定
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+
+# devicons 利用
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+hook_add = '''
+let g:WebDevIconsUnicodeDecorateFolderNodes = 1
+'''
+
+# インデント設定
+[[plugins]]
+repo = 'junegunn/vim-easy-align'
+
+# カラースキーマ
+[[plugins]]
+repo = 'mrkn/mrkn256.vim'
+hook_add = '''
+colorscheme mrkn256
+syntax enable
+'''
+
+# タグジャンプ用タグバー
+[[plugins]]
+repo = 'majutsushi/tagbar'
+hook_add = '''
+nmap <F8> :TagbarToggle<CR>
+'''
+
+# ステータスライン強化
+# PHPはPSR-1,2に準拠しているかのチェック
+# phpcsへのパスはcomposerでインストールした場合に設定
+[[plugins]]
+repo = 'w0rp/ale'
+on_ft = ['ruby', 'php']
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+on_ft = ['ruby','php']
+[[plugins]]
+repo = 'lambdalisue/gina.vim'
+on_ft = ['ruby', 'php']
+[[plugins]]
+repo = 'maximbaz/lightline-ale'
+on_ft = ['ruby', 'php']
+hook_add = '''
+let g:ale_linters = {
+  \ 'php': ['phpcs', 'php'],
+  \ 'ruby': ['rubocop'],
+  \}
+
+let g:ale_php_phpcs_standard = 'PSR1,PSR2'
+let g:ale_php_phpcs_executable = '~/.composer/vendor/bin/phpcs'
+
+let g:lightline = {
+  \ 'colorscheme': 'wombat',
+  \ 'separator': { 'left': "", 'right': "" },
+  \ 'subseparator': { 'left': "", 'right': "" },
+  \ 'component_function': {
+  \   'gitbranch': 'LightLineGitBranch',
+  \   'readonly': 'LightLineReadonly',
+  \   'modified': 'LightLineModified',
+  \   'filename': 'LightLineFilename',
+  \   'filetype': 'LightLineFiletype',
+  \   'fileformat': 'LightLineFileformat',
+  \ },
+  \ }
+
+let g:lightline.component_expand = {
+  \ 'gitbranch_gina': 'gina#component#repo#branch',
+  \  'linter_checking': 'lightline#ale#checking',
+  \  'linter_warnings': 'lightline#ale#warnings',
+  \  'linter_errors': 'lightline#ale#errors',
+  \  'linter_ok': 'lightline#ale#ok',
+  \ }
+let g:lightline.component_type = {
+  \     'linter_checking': 'raw',
+  \     'linter_warnings': 'warning',
+  \     'linter_errors': 'error',
+  \     'linter_ok': 'tabsel',
+  \ }
+
+let g:lightline.active = {
+  \ 'left' : [['mode', 'paste']],
+  \ 'right': [['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ], ['modified', 'readonly', 'filename', 'gitbranch'], [ 'fileformat', 'fileencoding', 'filetype' ]] }
+
+let g:lightline#ale#indicator_checking = "\uf420"
+let g:lightline#ale#indicator_warnings = "\uf421"
+let g:lightline#ale#indicator_errors = "\uf46f"
+let g:lightline#ale#indicator_ok = "\uf42e"
+
+function! LightLineModified()
+    if &filetype == "help"
+        return ""
+    elseif &modified
+        return "+"
+    elseif &modifiable
+        return ""
+    else
+        return ""
+    endif
+endfunction
+
+function! LightLineReadonly()
+    if &filetype == "help"
+        return ""
+    elseif &readonly
+        return ""
+    else
+        return ""
+    endif
+endfunction
+
+function! LightLineGitBranch()
+  return ''.gina#component#repo#branch() 
+endfunction
+
+function! LightLineFilename()
+    return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
+                \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
+                \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
+endfunction
+
+function! LightLineFiletype()
+  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
+endfunction
+
+function! LightLineFileformat()
+  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
+endfunction
+'''
+# インデントを可視化
+# [[plugins]]
+# repo = 'nathanaelkane/vim-indent-guides'
+# hook_add = '''
+# let g:indent_guides_auto_colors=0
+# autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=110
+# autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=140
+# let g:indent_guides_enable_on_vim_startup=1
+# let g:indent_guides_guide_size=1
+# '''
+
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+hook_add = '''
+" Vim
+let g:indentLine_color_term = 239
+
+" GVim
+let g:indentLine_color_gui = '#A4E57E'
+
+" none X terminal
+let g:indentLine_color_tty_light = 7 " (default: 4)
+let g:indentLine_color_dark = 1 " (default: 2)
+
+" Background (Vim, GVim)
+" let g:indentLine_bgcolor_term = 202
+" let g:indentLine_bgcolor_gui = '#FF5F00'
+
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
+'''
