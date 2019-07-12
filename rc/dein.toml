@@ -163,3 +163,49 @@ let g:indentLine_color_dark = 1 " (default: 2)
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 '''
+
+# コードの自動補完
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+on_i = 1
+hook_add = '''
+	let g:deoplete#enable_at_startup = 1
+	let g:deoplete#auto_completion_start_length = 1
+	inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+	inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
+'''
+ 
+# vim8でdeopleteを使うのに必要
+[[plugins]]
+repo = 'roxma/nvim-yarp'
+
+# vim8でdeopleteを使うのに必要
+[[plugins]]
+repo = 'roxma/vim-hug-neovim-rpc'
+
+# php
+[[plugins]]
+repo = 'phpactor/phpactor'
+on_ft = ['php']
+build = 'composer install'
+[[plugins]]
+repo = 'kristijanhusak/deoplete-phpactor'
+on_ft = ['php']
+hook_source = '''
+let g:deoplete#sources = {}
+let g:deoplete#sources.php = ['omni', 'phpactor', 'ultisnips', 'buffer']
+'''
+
+[[plugins]]
+repo = 'autozimu/LanguageClient-neovim'
+rev = 'next'
+build = 'bash install.sh'
+hook_add = '''
+	let g:deoplete#enable_at_startup = 1
+	let g:LanguageClient_serverCommands = {
+	    \ 'ruby': ['solargraph', 'stdio'],
+	\}
+	call deoplete#custom#var('omni', 'input_patterns', {
+	    \ 'ruby': ['[^. *\t]\.\w*', '[a-zA-Z_]\w*::'],
+	\})
+'''
