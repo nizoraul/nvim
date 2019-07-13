@@ -2,7 +2,6 @@
 " 基本設定
 "--------------------------------------------------------
 set noswapfile      " スワップファイルを作らない
-set nocompatible    " vi 互換モードをオフ（vim の拡張機能を有効に）
 "set hidden         " 編集中でも、保存しないで他のファイルを開けるようにする
 set confirm         " ファイルを保存していない場合に、ファイルの保存を確認するダイアログを出す
 set cmdheight=2     " 画面下部のコマンドラインの高さ
@@ -12,7 +11,6 @@ set vb t_vb=        " ビープを鳴らさない
 set mouse=a         " 全モードでマウスを有効化
 set viminfo+=!      " yankring用に!を追加
 set shellslash      " パス区切りをスラッシュにする
-set t_Co=256        " 256色ターミナルでVimを使用する
 set backspace=indent,eol,start  " BS でiなんでも消せるようにする
 set formatoptions+=mM           " 整形オプションにマルチバイト系を追加
 set clipboard=unnamed           " OSクリップボード使用
