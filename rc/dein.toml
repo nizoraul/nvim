@@ -32,29 +32,9 @@ nmap <F8> :TagbarToggle<CR>
 '''
 
 # ステータスライン強化
-# PHPはPSR-1,2に準拠しているかのチェック
-# phpcsへのパスはcomposerでインストールした場合に設定
-[[plugins]]
-repo = 'w0rp/ale'
-on_ft = ['ruby', 'php']
 [[plugins]]
 repo = 'itchyny/lightline.vim'
-on_ft = ['ruby','php']
-[[plugins]]
-repo = 'lambdalisue/gina.vim'
-on_ft = ['ruby', 'php']
-[[plugins]]
-repo = 'maximbaz/lightline-ale'
-on_ft = ['ruby', 'php']
 hook_add = '''
-let g:ale_linters = {
-  \ 'php': ['phpcs', 'php'],
-  \ 'ruby': ['rubocop'],
-  \}
-
-let g:ale_php_phpcs_standard = 'PSR1,PSR2'
-let g:ale_php_phpcs_executable = '~/.composer/vendor/bin/phpcs'
-
 let g:lightline = {
   \ 'colorscheme': 'wombat',
   \ 'separator': { 'left': "", 'right': "" },
@@ -69,13 +49,6 @@ let g:lightline = {
   \ },
   \ }
 
-let g:lightline.component_expand = {
-  \ 'gitbranch_gina': 'gina#component#repo#branch',
-  \  'linter_checking': 'lightline#ale#checking',
-  \  'linter_warnings': 'lightline#ale#warnings',
-  \  'linter_errors': 'lightline#ale#errors',
-  \  'linter_ok': 'lightline#ale#ok',
-  \ }
 let g:lightline.component_type = {
   \     'linter_checking': 'raw',
   \     'linter_warnings': 'warning',
@@ -86,11 +59,6 @@ let g:lightline.component_type = {
 let g:lightline.active = {
   \ 'left' : [['mode', 'paste']],
   \ 'right': [['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ], ['modified', 'readonly', 'filename', 'gitbranch'], [ 'fileformat', 'fileencoding', 'filetype' ]] }
-
-let g:lightline#ale#indicator_checking = "\uf420"
-let g:lightline#ale#indicator_warnings = "\uf421"
-let g:lightline#ale#indicator_errors = "\uf46f"
-let g:lightline#ale#indicator_ok = "\uf42e"
 
 function! LightLineModified()
     if &filetype == "help"
@@ -132,17 +100,8 @@ function! LightLineFileformat()
   return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
 '''
-# インデントを可視化
-# [[plugins]]
-# repo = 'nathanaelkane/vim-indent-guides'
-# hook_add = '''
-# let g:indent_guides_auto_colors=0
-# autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=110
-# autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=140
-# let g:indent_guides_enable_on_vim_startup=1
-# let g:indent_guides_guide_size=1
-# '''
 
+# インデント可視化
 [[plugins]]
 repo = 'Yggdroot/indentLine'
 hook_add = '''
@@ -164,48 +123,8 @@ let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 '''
 
-# コードの自動補完
+# コード補完 coc
 [[plugins]]
-repo = 'Shougo/deoplete.nvim'
-on_i = 1
-hook_add = '''
-	let g:deoplete#enable_at_startup = 1
-	let g:deoplete#auto_completion_start_length = 1
-	inoremap <silent><expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
-	inoremap <silent><expr><s-tab> pumvisible() ? "\<c-p>" : "\<s-tab>"
-'''
- 
-# vim8でdeopleteを使うのに必要
-[[plugins]]
-repo = 'roxma/nvim-yarp'
+repo = 'neoclide/coc.nvim'
+build = 'coc#util#install()'
 
-# vim8でdeopleteを使うのに必要
-[[plugins]]
-repo = 'roxma/vim-hug-neovim-rpc'
-
-# php
-[[plugins]]
-repo = 'phpactor/phpactor'
-on_ft = ['php']
-build = 'composer install'
-[[plugins]]
-repo = 'kristijanhusak/deoplete-phpactor'
-on_ft = ['php']
-hook_source = '''
-let g:deoplete#sources = {}
-let g:deoplete#sources.php = ['omni', 'phpactor', 'ultisnips', 'buffer']
-'''
-
-[[plugins]]
-repo = 'autozimu/LanguageClient-neovim'
-rev = 'next'
-build = 'bash install.sh'
-hook_add = '''
-	let g:deoplete#enable_at_startup = 1
-	let g:LanguageClient_serverCommands = {
-	    \ 'ruby': ['solargraph', 'stdio'],
-	\}
-	call deoplete#custom#var('omni', 'input_patterns', {
-	    \ 'ruby': ['[^. *\t]\.\w*', '[a-zA-Z_]\w*::'],
-	\})
-'''
