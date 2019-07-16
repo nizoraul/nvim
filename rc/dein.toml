@@ -31,76 +31,15 @@ hook_add = '''
 nmap <F8> :TagbarToggle<CR>
 '''
 
-# ステータスライン強化
+# ステータスライン
 [[plugins]]
-repo = 'itchyny/lightline.vim'
+repo = 'vim-airline/vim-airline'
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
 hook_add = '''
-let g:lightline = {
-  \ 'colorscheme': 'wombat',
-  \ 'separator': { 'left': "", 'right': "" },
-  \ 'subseparator': { 'left': "", 'right': "" },
-  \ 'component_function': {
-  \   'gitbranch': 'LightLineGitBranch',
-  \   'readonly': 'LightLineReadonly',
-  \   'modified': 'LightLineModified',
-  \   'filename': 'LightLineFilename',
-  \   'filetype': 'LightLineFiletype',
-  \   'fileformat': 'LightLineFileformat',
-  \ },
-  \ }
-
-let g:lightline.component_type = {
-  \     'linter_checking': 'raw',
-  \     'linter_warnings': 'warning',
-  \     'linter_errors': 'error',
-  \     'linter_ok': 'tabsel',
-  \ }
-
-let g:lightline.active = {
-  \ 'left' : [['mode', 'paste']],
-  \ 'right': [['linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ], ['modified', 'readonly', 'filename', 'gitbranch'], [ 'fileformat', 'fileencoding', 'filetype' ]] }
-
-function! LightLineModified()
-    if &filetype == "help"
-        return ""
-    elseif &modified
-        return "+"
-    elseif &modifiable
-        return ""
-    else
-        return ""
-    endif
-endfunction
-
-function! LightLineReadonly()
-    if &filetype == "help"
-        return ""
-    elseif &readonly
-        return ""
-    else
-        return ""
-    endif
-endfunction
-
-function! LightLineGitBranch()
-  return ''.gina#component#repo#branch() 
-endfunction
-
-function! LightLineFilename()
-    return ('' != LightLineReadonly() ? LightLineReadonly() . ' ' : '') .
-                \ ('' != expand('%:t') ? expand('%:t') : '[No Name]') .
-                \ ('' != LightLineModified() ? ' ' . LightLineModified() : '')
-endfunction
-
-function! LightLineFiletype()
-  return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
-endfunction
-
-function! LightLineFileformat()
-  return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
-endfunction
+	let g:airline_theme = 'wombat'
+	let g:airline_powerline_fonts = 1
 '''
-
 # インデント可視化
 [[plugins]]
 repo = 'Yggdroot/indentLine'
@@ -120,7 +59,6 @@ let g:indentLine_color_dark = 1 " (default: 2)
 " let g:indentLine_bgcolor_gui = '#FF5F00'
 
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-
 '''
 
 # コード補完 coc
