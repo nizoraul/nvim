@@ -14,7 +14,7 @@ set shellslash      " パス区切りをスラッシュにする
 set backspace=indent,eol,start  " BS でiなんでも消せるようにする
 set formatoptions+=mM           " 整形オプションにマルチバイト系を追加
 set clipboard=unnamed           " OSクリップボード使用
-set ambiwidth=double            " □とか○の文字があってもカーソル位置がずれないようにする
+set ambiwidth=single            " □とか○の文字があってもカーソル位置がずれないようにする
 set formatoptions+=mM           "整形オプ
 set laststatus=2                "ステータスライン2行
 set tags+=tags                  "タグジャンプ
