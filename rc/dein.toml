@@ -70,5 +70,7 @@ build = 'coc#util#install()'
 hook_add = '''
 " Use <C-l> スニペット候補表示
 imap <C-l> coc-snippets-expand
+" 構文エラーメッセージの表示待ち時間(ms)(default=4000)
+set updatetime=300
 '''
 
