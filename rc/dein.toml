@@ -68,9 +68,51 @@ let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 repo = 'neoclide/coc.nvim'
 build = 'coc#util#install()'
 hook_add = '''
+" 設定していないとTextEditが失敗するかも
+set hidden
+
 " Use <C-l> スニペット候補表示
 imap <C-l> coc-snippets-expand
+
 " 構文エラーメッセージの表示待ち時間(ms)(default=4000)
 set updatetime=300
+
+" タブキーで候補選択
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" returnで候補の確定
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" `[c` and `]c` で構文エラーをナビゲート
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" キーマップ
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Kキーでドキュメント表示
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" カーソルの下のシンボルをハイライト表示
+autocmd CursorHold * silent call CocActionAsync('highlight')
 '''
 
