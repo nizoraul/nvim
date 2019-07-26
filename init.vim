@@ -82,6 +82,7 @@ set smarttab            "新しい行を作った時に高度な自動インデ�
 set tabstop=2           "タブを含むファイルを開いた際, タブを何文字の空白に変換するか
 set shiftwidth=2        "自動インデントで入る空白数
 set softtabstop=0       "キーボードから入るタブの数
+set expandtab           "タブを無効化（タブの代わりにスペースを使う）
 
 if has("autocmd")
   "ファイルタイプの検索を有効にする
