@@ -72,6 +72,13 @@ set fileencodings=utf-8,iso-2022-jp,cp932,euc-jp,sjis
 set fileformats=unix,dos,mac
 
 "--------------------------------------------------------
+" 追加のファイルファイプ設定
+"--------------------------------------------------------
+
+" slim
+autocmd BufNewFile,BufRead *.slim setlocal filetype=slim
+
+"--------------------------------------------------------
 " インデント設定
 "--------------------------------------------------------
 
@@ -215,5 +222,5 @@ if dein#load_state(s:dein_dir)
   call dein#save_state()
 endi
 
-colorscheme mrkn256
-syntax enable
+"colorscheme mrkn256
+" syntax enable
