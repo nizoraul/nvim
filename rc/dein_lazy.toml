@@ -13,7 +13,12 @@ nnoremap <silent> <C-p> :PrevimOpen<CR>
 repo = 'kana/vim-smartinput'
 on_ft = ['ruby']
 
-[[plugins]] # toml syntax
+# toml syntax
+[[plugins]]
 repo = 'cespare/vim-toml'
 on_ft = ['toml']
 
+# slim syntax
+[[plungins]]
+repo = 'slim-template/vim-slim'
+on_ft = ['slim']
