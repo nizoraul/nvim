@@ -61,6 +61,7 @@ hook_add = '''
 repo = 'Yggdroot/indentLine'
 hook_add = '''
 " Vim
+let g:indentLine_enabled = 1
 let g:indentLine_color_term = 239
 
 " GVim
@@ -74,8 +75,12 @@ let g:indentLine_color_dark = 1 " (default: 2)
 " let g:indentLine_bgcolor_term = 202
 " let g:indentLine_bgcolor_gui = '#FF5F00'
 
-let g:indentLine_char_list = '|'
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 '''
+# jsonのシンタックスハイライト（これをindentLineのあとに入れないとjsonのダブルクォーテーションが表示されない）
+[[plugins]]
+repo     = 'elzr/vim-json'
+hook_add = 'let g:vim_json_syntax_conceal = 0'
 
 # コード補完 coc
 [[plugins]]

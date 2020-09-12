@@ -221,5 +221,9 @@ if dein#load_state(s:dein_dir)
   call dein#save_state()
 endi
 
-colorscheme mrkn256
-syntax enable
+"---------------------------
+" パッケージ管理後の微調整設定
+"---------------------------
+
+" colorscheme mrkn256     ” カラーテーマmrkn256を設定
+syntax enable           " シンタックスハイライト
