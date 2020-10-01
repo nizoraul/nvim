@@ -18,11 +18,6 @@ on_ft = ['ruby']
 repo = 'cespare/vim-toml'
 on_ft = ['toml']
 
-# slim syntax
-[[plungins]]
-repo = 'slim-template/vim-slim'
-on_ft = ['slim']
-
 # rails
 [[plugins]]
 repo = 'tpope/vim-rails'

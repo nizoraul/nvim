@@ -76,6 +76,8 @@ let g:indentLine_color_dark = 1 " (default: 2)
 " let g:indentLine_bgcolor_gui = '#FF5F00'
 
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
+let g:indentLine_faster = 0
 '''
 # jsonのシンタックスハイライト（これをindentLineのあとに入れないとjsonのダブルクォーテーションが表示されない）
 [[plugins]]
