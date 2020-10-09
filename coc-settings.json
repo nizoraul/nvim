@@ -1,6 +1,7 @@
 {
     "codeLens.enable": true,
     "solargraph.useBundler": false,
-    "solargraph.diagnostics": true
+    "solargraph.diagnostics": true,
+    "docker-enable": true
 }
 

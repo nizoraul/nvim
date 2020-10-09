@@ -124,7 +124,7 @@ highlight CocWarningSign ctermfg=0 ctermbg=172
 nmap <silent> fl :<C-u>CocList<cr>
 nmap <silent> fh :<C-u>call CocAction('doHover')<cr>
 nmap <silent> fd <Plug>(coc-definition)
-nmap <silent> fy <Plug>(coc-type-definition)
+nmap <silent> fg <Plug>(coc-type-definition)
 nmap <silent> fi <Plug>(coc-implementation)
 nmap <silent> fr <Plug>(coc-references)
 nmap <silent> ff <Plug>(coc-format)
