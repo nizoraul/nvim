@@ -4,19 +4,21 @@ repo = 'Shougo/dein.vim'
 # NERDTreeを設定
 [[plugins]]
 repo = 'scrooloose/nerdtree'
+
+# NERDTreeが異なるタブでも同期する設定
+[[plugins]]
+repo = 'jistr/vim-nerdtree-tabs'
 hook_add = '''
-" pNERDTreeを自動的に起動する。またディレクトリ指定起動以外はフォーカスをファイルに移動する。
-" 終了時にNERDTree以外のバッファがなかったら閉じる
-augroup NERDTreeSetting
-    autocmd!
-    autocmd StdinReadPre * let s:std_in = 1
-    if (argc() == 0 || argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in"))
-        autocmd vimenter * NERDTreeToggle
-    else
-        autocmd vimenter * NERDTreeToggle | wincmd p
-    endif
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-augroup END
+" 隠しファイルを表示する
+let NERDTreeShowHidden = 1
+
+nnoremap <silent><C-e> :NERDTreeFocusToggle<CR>
+
+" デフォルトでツリーを表示させる
+let g:nerdtree_tabs_open_on_console_startup=1
+
+" 他のバッファをすべて閉じた時にNERDTreeが開いていたらNERDTreeも一緒に閉じる。
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 '''
 
 # devicons 利用
