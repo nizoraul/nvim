@@ -36,7 +36,7 @@ repo = 'junegunn/vim-easy-align'
 [[plugins]]
 repo = 'mrkn/mrkn256.vim'
 hook_add = '''
-colorscheme mrkn256
+autocmd VimEnter * ++nested colorscheme mrkn256
 syntax enable
 '''
 
@@ -55,7 +55,13 @@ repo = 'vim-airline/vim-airline'
 [[plugins]]
 repo = 'vim-airline/vim-airline-themes'
 hook_add = '''
+" smart tab lineを有効化
+  let g:airline#extensions#tabline#enabled = 1
+" タブに 番号を表示
+  let g:airline#extensions#tabline#buffer_idx_mode = 1
+" テーマ
 	let g:airline_theme = 'wombat'
+" power lineフォントを利用
 	let g:airline_powerline_fonts = 1
 '''
 # インデント可視化
