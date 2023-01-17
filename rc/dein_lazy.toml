@@ -1,13 +1,3 @@
-# 編集中のMarkdownファイルのプレビューを作成する
-[[plugins]]
-repo = 'kannokanno/previm'
-on_ft = ['markdown','mkd']
-hook_add = """
-let g:previm_open_cmd = 'open -a Google\ Chrome'
-" ctrl pでプレビュー
-nnoremap <silent> <C-p> :PrevimOpen<CR>
-"""
-
 # カッコやdef〜endの入力保管
 [[plugins]]
 repo = 'kana/vim-smartinput'
@@ -21,3 +11,18 @@ on_ft = ['toml']
 # rails
 [[plugins]]
 repo = 'tpope/vim-rails'
+
+# Vdebug
+[[plugins]]
+repo = "puremourning/vimspector"
+on_ft = ["php", "javascript"]
+
+# previm
+[[plugins]]
+repo = 'kannokanno/previm'
+on_cmd = 'PrevimOpen'
+hook_add = """
+let g:previm_open_cmd = 'open -a Google\ Chrome'
+" ctrl pでプレビュー
+nnoremap <silent> <C-p> :PrevimOpen<CR>
+"""
