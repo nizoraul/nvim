@@ -23,6 +23,7 @@ repo = 'kannokanno/previm'
 on_cmd = 'PrevimOpen'
 hook_add = """
 let g:previm_open_cmd = 'open -a Google\ Chrome'
+let g:previm_show_header = 0
 " ctrl pでプレビュー
 nnoremap <silent> <C-p> :PrevimOpen<CR>
 """
